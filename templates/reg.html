@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Регистрация
+{% endblock %}
+
+{% block css %}
+href = "{{url_for('static', filename='css/reg.css')}}"
+{% endblock %}
+
+
+{% block body %}
+<div class="div-reg">
+    <!-- multistep form -->
+<form class="form-reg" action="/insert" id="msform" method="POST">
+
+  <fieldset>
+    <h2 style="text-align: center;" class="fs-title">Создание аккаунта</h2>
+<br>
+    <input type="text" name="login" placeholder="login" />
+      <div  class="div-reg" >
+    <input type="password" name="pass" placeholder="Password" />
+    <input type="password" name="cpass" placeholder="Confirm Password" />
+      </div>
+      <br><br>
+     <div class="div-reg">
+      <input class="button"   value="Создать" name="insert" type="submit" class="next action-button"/>
+     </div>
+         <div class="div-reg">
+          <a href="/auth">Есть аккаунт? Авторизуйтесь</a>
+     </div>
+      <!-- <button name="insert" type="submit" class="next action-button">Создать</button> -->
+  </fieldset>
+     <br><br>
+     <div style="text-align: center; color:red" class="div-reg">
+ {% for message in get_flashed_messages() %}
+<p>{{message}}</p>
+{% endfor %}
+ </div>
+</form>
+
+</div>
+
+
+
+{% endblock %}
