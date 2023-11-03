@@ -91,12 +91,16 @@ def edit_psev():
 
     if request.method == 'POST':
         link_id = request.form['id']
+
         psev = request.form["psev"]
-        new_link = request.host_url + "meow/" + psev
-        if getPsev(new_link) != None:
-            flash("псевдоним занят", category="errors")
+        if psev == '':
+            flash("вы не заполнили псевдоним", category="errors")
         else:
-            editPsevOfLink(new_link, link_id)
+            new_link = request.host_url + "meow/" + psev
+            if getPsev(new_link) != None:
+                flash("псевдоним занят", category="errors")
+            else:
+                editPsevOfLink(new_link, link_id)
         return redirect('/user', code=302)
 
 @app.route('/edit_type', methods=['POST'])

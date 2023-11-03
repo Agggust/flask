@@ -12,6 +12,11 @@ href = "{{url_for('static', filename='css/user.css')}}"
 {% block body %}
 <br>
 <div class="container">
+	{% for c, mes in get_flashed_messages(True) %}
+            	{% if(c == "errors")%}
+               	 	<p style="color:red">{{mes}}</p>
+            	{% endif %}
+            	{% endfor %}
 <table class="table">
 	<thead>
 		<tr>
@@ -42,28 +47,21 @@ href = "{{url_for('static', filename='css/user.css')}}"
 				 	</select>
 					<button name="id" value={{i[4]}}>Edit</button>
 			 	</form>
-			 	{% for c, mes in get_flashed_messages(True) %}
-            	{% if(c == "errors")%}
-               	 	<p style="color:red">{{mes}}</p>
-            	{% endif %}
-            	{% endfor %}
+
 			</td>
 		 	<td>
 			 	<form method="POST" action="edit_psev">
 					<input name="psev" value={{ i[3].replace(request.host_url + 'meow/', '') }} />
 					<button name="id" value={{i[4]}}>Edit</button>
 			 	</form>
-			 	{% for c, mes in get_flashed_messages(True) %}
-            	{% if(c == "errors")%}
-               	 	<p style="color:red">{{mes}}</p>
-            	{% endif %}
-            	{% endfor %}
+
 		 	</td>
 			<td>
 				<form method="POST" action="del">
 					<button name="id" value={{i[4]}}>Delete</button>
 				</form>
 			</td>
+
 		</tr>
      {% endfor %}
 
